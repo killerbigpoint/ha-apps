@@ -1,6 +1,6 @@
-# Nginx Proxy Manager Host
+# Killer_bigpoint's Apps
 
-The Nginx Proxy Manager app for Home Assistant, maintained by [Killer_bigpoint](https://github.com/killerbigpoint). This version includes support for network host mode which allows you to use the Stream feature to redirect port traffic
+A collection of apps that I use for Home Assistant
 
 ## Adding This Repository to Home Assistant
 
@@ -12,11 +12,12 @@ The Nginx Proxy Manager app for Home Assistant, maintained by [Killer_bigpoint](
    https://github.com/killerbigpoint/ha-app-nginx-proxy-manager-host
    ```
 
-4. The app will appear in your store
+4. Enjoy the apps I make
 
-## Documentation
+## Apps
 
 - [Nginx Proxy Manager](./nginx-proxy-manager/README.md)
+- [Immich](./immich/README.md)
 
 ## License
 
