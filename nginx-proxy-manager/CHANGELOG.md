@@ -4,7 +4,7 @@ All notable changes to the Nginx Proxy Manager app will be documented here.
 
 ---
 
-## [0.7.1] - 2026-06-10
+## [0.7.1] - 2026-10-27
 
 ### ⚠️ SECURITY ADVISORY
 
