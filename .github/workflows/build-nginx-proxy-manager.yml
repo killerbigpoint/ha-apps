@@ -101,7 +101,7 @@ jobs:
 
           # Add reference to upstream release notes
           echo "" >> /tmp/changelog.txt
-          echo "[View upstream Nginx Proxy Manager release notes](https://github.com/NginxProxyManager/nginx-proxy-manager/releases)" >> /tmp/changelog.txt
+          echo "[View upstream NPMPlus release notes](https://github.com/ZoeyVid/NPMplus/releases)" >> /tmp/changelog.txt
 
           # Store as multiline output
           {
