@@ -4,6 +4,14 @@ All notable changes to the Nginx Proxy Manager app will be documented here.
 
 ---
 
+## [0.7.2] - 2026-10-30
+
+### Changed
+
+- Enable Cloudflare IPs as reverse proxy
+
+---
+
 ## [0.7.1] - 2026-10-27
 
 ### ⚠️ SECURITY ADVISORY
