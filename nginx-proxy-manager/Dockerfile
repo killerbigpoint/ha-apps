@@ -4,6 +4,9 @@
 ARG BUILD_FROM
 FROM zoeyvid/npmplus:2026-10-22-r1
 
+# Enable Cloudflare trusted IP ranges
+ENV TRUST_CLOUDFLARE=true
+
 # Run our HA setup script early in s6's cont-init sequence.
 # Uses /bin/sh — with-contenv is not available in the jc21 base image.
 COPY cont-init.d/01-ha-setup.sh /etc/cont-init.d/01-ha-setup.sh
