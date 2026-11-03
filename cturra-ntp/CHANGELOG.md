@@ -4,6 +4,16 @@ All notable changes to the Cturra Ntp app will be documented here.
 
 ---
 
+## [1.0.0] - 2026-11-03
+
+### Changed
+
+- Mark project as stable
+- Removed internal ntp server as the result got worse over time
+- Made NTP_SERVERS configurable
+
+---
+
 ## [0.2.0] - 2026-11-03
 
 ### Changed
