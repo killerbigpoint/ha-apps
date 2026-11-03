@@ -1,9 +1,22 @@
-#!/usr/bin/env bash
-# NOTE: This script is NOT copied into the container and is NOT the container
-# entrypoint. NPM's image uses s6-overlay, and /init must run as PID 1.
-#
-# Startup logic lives in cont-init.d/01-ha-setup.sh, which s6 executes
-# during its normal init sequence before NPM's services start.
-#
-# This file is kept as a placeholder per HA add-on repository convention.
-echo "See cont-init.d/01-ha-setup.sh for container startup logic."
+
+#!/bin/sh
+set -eu
+
+OPTIONS_FILE="/data/options.json"
+
+# Verify that Home Assistant configuration exists
+if [ ! -r "$OPTIONS_FILE" ]; then
+    echo "ERROR: Cannot read Home Assistant options: $OPTIONS_FILE" >&2
+    exit 1
+fi
+
+# Read NTP servers from Home Assistant configuration
+NTP_SERVERS="$(jq -r '.ntp_servers // "time.cloudflare.com"' "$OPTIONS_FILE")"
+
+# Export the variable for the upstream startup script
+export NTP_SERVERS
+
+echo "Starting NTP with servers: ${NTP_SERVERS:-time.cloudflare.com}"
+
+# Execute the original upstream startup script
+exec /bin/sh /opt/startup.sh
