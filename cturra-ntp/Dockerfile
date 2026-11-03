@@ -6,7 +6,7 @@ FROM cturra/ntp:latest
 
 # Set preferred environment variables
 ENV TZ=Europe/Copenhagen
-ENV NTP_SERVERS=dk.pool.ntp.org
+ENV NTP_SERVERS="192.168.0.2,dk.pool.ntp.org"
 ENV LOG_LEVEL=0
 
 # Run our HA setup script early in s6's cont-init sequence.
