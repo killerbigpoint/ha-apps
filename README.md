@@ -9,7 +9,7 @@ A collection of apps that I use for Home Assistant
 3. Add the following URL:
 
    ```text
-   https://github.com/killerbigpoint/ha-app-nginx-proxy-manager-host
+   https://github.com/killerbigpoint/ha-apps
    ```
 
 4. Enjoy the apps I make
