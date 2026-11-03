@@ -26,6 +26,6 @@
     "ntp_servers": "time.cloudflare.com"
   },
   "schema": {
-    "ntp_servers": str
+    "ntp_servers": "str"
   }
 }
