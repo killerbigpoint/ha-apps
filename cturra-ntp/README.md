@@ -5,7 +5,7 @@
 ![Maintained][maintenance-shield]
 
 Lightweight docker container that runs a Chrony Network Time Protocol (NTPv4) server
-This app runs the **latest upstream** ([ZoeyVid/NPMplus](https://github.com/ZoeyVid/NPMplus)) image (currently v2026-10-22-r1).
+This app runs the **latest upstream** ([cturra/ntp](https://github.com/cturra/docker-ntp)) image.
 
 ## Features
 
