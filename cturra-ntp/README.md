@@ -1,0 +1,42 @@
+# Cturra Ntp
+
+![Version][version-shield]
+![Project Stage][project-stage-shield]
+![Maintained][maintenance-shield]
+
+Lightweight docker container that runs a Chrony Network Time Protocol (NTPv4) server
+This app runs the **latest upstream** ([ZoeyVid/NPMplus](https://github.com/ZoeyVid/NPMplus)) image (currently v2026-10-22-r1).
+
+## Features
+
+- Free SSL via Let's Encrypt (HTTP-01 and DNS-01 challenges)
+- Reverse proxy with custom locations, websocket support, and access lists
+- Redirect and 404 hosts
+- Beautiful web UI on port 81
+- Streams support
+
+## Ports
+
+| Port | Protocol  | Description                        |
+| ---- | --------- | ---------------------------------- |
+| 123  | UDP       | Network Time Protocol              |
+
+## Upgrading
+
+Update the app through the Home Assistant UI when a new version is published.
+
+After upgrading, verify that:
+
+1. The app starts successfully.
+2. You can update time correctly
+
+## Notes
+
+- Ports 123 must be free on the host
+- This add-on does **not** use a HA base image; it uses the official cturra-ntp Docker image directly.
+
+[version-shield]: https://img.shields.io/badge/version-0.1.0-blue.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
+[forum]: https://community.home-assistant.io
