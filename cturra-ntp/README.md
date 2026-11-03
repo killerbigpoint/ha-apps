@@ -9,11 +9,7 @@ This app runs the **latest upstream** ([ZoeyVid/NPMplus](https://github.com/Zoey
 
 ## Features
 
-- Free SSL via Let's Encrypt (HTTP-01 and DNS-01 challenges)
-- Reverse proxy with custom locations, websocket support, and access lists
-- Redirect and 404 hosts
-- Beautiful web UI on port 81
-- Streams support
+- NTP server to syncronize all your home devices with correct time
 
 ## Ports
 
