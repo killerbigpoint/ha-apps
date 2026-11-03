@@ -8,11 +8,15 @@ FROM cturra/ntp:latest
 ENV TZ=Europe/Copenhagen
 ENV LOG_LEVEL=0
 
-# Run our HA setup script early in s6's cont-init sequence.
-# Uses /bin/sh — with-contenv is not available in the jc21 base image.
-COPY cont-init.d/01-ha-setup.sh /etc/cont-init.d/01-ha-setup.sh
-RUN chmod +x /etc/cont-init.d/01-ha-setup.sh
+# Install jq to read Home Assistant configuration
+RUN apk add --no-cache jq
 
+# Add our Home Assistant startup wrapper
+COPY run.sh /usr/local/bin/ha-entrypoint.sh
+RUN chmod +x /usr/local/bin/ha-entrypoint.sh
+
+# Expose port 123
 EXPOSE 123
 
-# Do NOT override ENTRYPOINT — s6-overlay (/init) must run as PID 1.
+# Replace upstream entrypoint with our wrapper
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/ha-entrypoint.sh"]
