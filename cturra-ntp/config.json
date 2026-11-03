@@ -1,6 +1,6 @@
 {
   "name": "Cturra Ntp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "image": "ghcr.io/killerbigpoint/ha-app-cturra-ntp/{arch}-addon-cturra-ntp",
   "slug": "cturra-ntp",
   "description": "Lightweight docker container that runs a Chrony Network Time Protocol (NTPv4) server. Report bugs, issues, or feature requests: https://github.com/killerbigpoint/ha-apps/issues",
