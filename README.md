@@ -17,6 +17,7 @@ A collection of apps that I use for Home Assistant
 ## Apps
 
 - [Nginx Proxy Manager](./nginx-proxy-manager/README.md)
+- [Cturra Ntp](./cturra-ntp/README.md)
 
 ## License
 
