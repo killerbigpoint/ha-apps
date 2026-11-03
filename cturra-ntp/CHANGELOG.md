@@ -4,6 +4,14 @@ All notable changes to the Cturra Ntp app will be documented here.
 
 ---
 
+## [1.0.1] - 2026-11-03
+
+### Changed
+
+- Refactor so NTP_SERVERS can actually be configured
+
+---
+
 ## [1.0.0] - 2026-11-03
 
 ### Changed
