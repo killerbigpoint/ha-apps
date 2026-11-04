@@ -15,7 +15,7 @@ type Options struct {
 }
 
 func main() {
-	const optionsFile = "/data/options.json"
+	const optionsFile = "/app/data/options.json"
 
 	data, err := os.ReadFile(optionsFile)
 	if err != nil {
