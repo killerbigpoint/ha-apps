@@ -1,0 +1,35 @@
+{
+  "name": "Arcane App",
+  "version": "0.1.0",
+  "image": "ghcr.io/killerbigpoint/ha-app-cturra-ntp/{arch}-addon-arcane",
+  "slug": "cturra-ntp",
+  "description": "Modern Docker Management, Designed for Everyone. Report bugs, issues, or feature requests: https://github.com/killerbigpoint/ha-apps/issues",
+  "url": "https://github.com/getarcaneapp/arcane",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "startup": "services",
+  "boot": "auto",
+  "init": false,
+  "backup_exclude": [
+    "*/logs"
+  ],
+  "ports": {
+    "3552/tcp": 3552
+  },
+  "ports_description": {
+    "3552/tcp": "Admin Interface"
+  },
+  "map": [],
+  "options": {
+    "ENCRYPTION_KEY": "",
+    "AGENT_MODE": "",
+    "AGENT_TOKEN": ""
+  },
+  "schema": {
+    "ENCRYPTION_KEY": "str",
+    "AGENT_MODE": "str",
+    "AGENT_TOKEN": "str"
+  }
+}
