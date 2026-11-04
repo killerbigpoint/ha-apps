@@ -1,18 +1,20 @@
-# Use the official Cturra Ntp image directly.
-# BUILD_FROM is declared to satisfy HA's build tooling but not used —
-# we want the full NPM image, not the minimal HA base.
-ARG BUILD_FROM
+COPY ha-entrypoint.go .
+
+RUN mkdir -p /out && \
+    CGO_ENABLED=0 \
+    GOOS=${TARGETOS:-linux} \
+    GOARCH=${TARGETARCH} \
+    go build \
+    -trimpath \
+    -ldflags="-s -w" \
+    -o /out/ha-entrypoint \
+    ./ha-entrypoint.go
+
+# Use the official Arcane runtime image.
 FROM getarcaneapp/manager:latest
 
-# Install jq to read Home Assistant configuration
-RUN apk add --no-cache jq
+# Copy the statically compiled startup wrapper.
+COPY --from=wrapper-builder /out/ha-entrypoint /app/ha-entrypoint
 
-# Add our Home Assistant startup wrapper
-COPY run.sh /usr/local/bin/ha-entrypoint.sh
-RUN chmod +x /usr/local/bin/ha-entrypoint.sh
-
-# Expose port 3552
-EXPOSE 3552
-
-# Replace upstream entrypoint with our wrapper
-ENTRYPOINT ["/bin/sh", "/usr/local/bin/ha-entrypoint.sh"]
+# Replace the entrypoint while retaining Arcane's original CMD.
+ENTRYPOINT ["/app/ha-entrypoint"]
