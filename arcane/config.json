@@ -23,8 +23,10 @@
     "3552/tcp": "Admin Interface"
   },
   "map": [
-    "type": "data",
-    "path": "/app/data"
+    {
+      "type": "data",
+      "path": "/app/data"
+    }
   ],
   "options": {
     "ENCRYPTION_KEY": "",
