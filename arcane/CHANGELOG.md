@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the Cturra Ntp app will be documented here.
+All notable changes to the Arcane app will be documented here.
 
 ---
 
