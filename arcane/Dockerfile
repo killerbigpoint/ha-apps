@@ -1,3 +1,10 @@
+# syntax=docker/dockerfile:1
+
+FROM --platform=$BUILDPLATFORM golang:1.27-alpine AS wrapper-builder
+
+ARG TARGETOS
+ARG TARGETARCH
+
 WORKDIR /src
 
 COPY ha-entrypoint.go .
