@@ -25,7 +25,7 @@
   "map": [],
   "options": {
     "ENCRYPTION_KEY": "",
-    "AGENT_MODE": "",
+    "AGENT_MODE": "false",
     "AGENT_TOKEN": ""
   },
   "schema": {
