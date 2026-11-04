@@ -12,6 +12,7 @@
   "startup": "services",
   "boot": "auto",
   "init": false,
+  "docker_api": true,
   "backup_exclude": [
     "*/logs"
   ],
