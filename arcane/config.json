@@ -22,7 +22,10 @@
   "ports_description": {
     "3552/tcp": "Admin Interface"
   },
-  "map": [],
+  "map": [
+    "type": "data",
+    "path": "/app/data"
+  ],
   "options": {
     "ENCRYPTION_KEY": "",
     "AGENT_MODE": "false",
