@@ -31,8 +31,8 @@ After upgrading, verify that:
 - Ports 3552 must be free on the host
 - This add-on does **not** use a HA base image; it uses the official getarcaneapp Docker image directly.
 
-[version-shield]: https://img.shields.io/badge/version-0.1.0-blue.svg
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
+[version-shield]: https://img.shields.io/badge/version-1.0.0-blue.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-stable-green.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
 [forum]: https://community.home-assistant.io

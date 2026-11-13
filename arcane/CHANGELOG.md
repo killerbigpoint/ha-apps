@@ -4,6 +4,14 @@ All notable changes to the Arcane app will be documented here.
 
 ---
 
+## [1.0.0] - 2026-11-13
+
+### Changed
+
+- Mark addon as stable
+
+---
+
 ## [0.1.0] - 2026-11-04
 
 ### Added

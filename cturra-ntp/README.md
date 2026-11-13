@@ -31,7 +31,7 @@ After upgrading, verify that:
 - Ports 123 must be free on the host
 - This add-on does **not** use a HA base image; it uses the official cturra-ntp Docker image directly.
 
-[version-shield]: https://img.shields.io/badge/version-1.0.1-blue.svg
+[version-shield]: https://img.shields.io/badge/version-1.0.2-blue.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-stable-green.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg

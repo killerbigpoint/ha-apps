@@ -4,6 +4,14 @@ All notable changes to the Cturra Ntp app will be documented here.
 
 ---
 
+## [1.0.2] - 2026-11-13
+
+### Changed
+
+- Bump version along with the others
+
+---
+
 ## [1.0.1] - 2026-11-03
 
 ### Changed

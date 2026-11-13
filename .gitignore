@@ -10,6 +10,7 @@ env/
 ENV/
 
 # Editor directories and files
+.vs/
 .vscode/
 .idea/
 *.sublime-project

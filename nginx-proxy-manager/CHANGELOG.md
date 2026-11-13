@@ -4,6 +4,14 @@ All notable changes to the Nginx Proxy Manager app will be documented here.
 
 ---
 
+## [1.0.0] - 2026-11-13
+
+### Changed
+
+- Mark addon as stable
+
+---
+
 ## [0.7.2] - 2026-10-30
 
 ### Changed
