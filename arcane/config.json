@@ -1,6 +1,6 @@
 {
   "name": "Arcane App",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "image": "ghcr.io/killerbigpoint/ha-app-arcane/{arch}-addon-arcane",
   "slug": "arcane",
   "description": "Modern Docker Management, Designed for Everyone. Report bugs, issues, or feature requests: https://github.com/killerbigpoint/ha-apps/issues",

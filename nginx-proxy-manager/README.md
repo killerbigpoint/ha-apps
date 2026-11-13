@@ -61,7 +61,7 @@ The `icon.png` used by this add-on is the official Nginx Proxy Manager logo,
 sourced from the [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
 repository. All logo rights belong to the Nginx Proxy Manager contributors.
 
-[version-shield]: https://img.shields.io/badge/version-1.0.0-blue.svg
+[version-shield]: https://img.shields.io/badge/version-1.0.1-blue.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-stable-green.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
