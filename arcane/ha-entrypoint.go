@@ -66,6 +66,10 @@ func main() {
 		fatal("Cannot set AGENT_TOKEN: %v", err)
 	}
 
+	if err := os.Setenv("DOCKER_HOST", "unix:///run/docker.sock"); err != nil {
+    	fatal("Cannot set DOCKER_HOST: %v", err)
+	}
+
 	fmt.Println("Home Assistant configuration loaded successfully.")
 
 	// Preserve the original Docker CMD.
