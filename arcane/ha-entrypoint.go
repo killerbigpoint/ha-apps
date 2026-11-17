@@ -47,7 +47,7 @@ func main() {
 	args := os.Args[1:]
 
 	if len(args) == 0 {
-		args = []string{"/app/arcane"}
+		args = []string{"/app/arcane-agent"}
 	}
 
 	// Replace this process with Arcane.
