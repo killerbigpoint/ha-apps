@@ -1,6 +1,6 @@
 {
   "name": "Arcane App (Agent)",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "image": "ghcr.io/killerbigpoint/ha-app-arcane/{arch}-addon-arcane",
   "slug": "arcane",
   "description": "Modern Docker Management, Designed for Everyone. Report bugs, issues, or feature requests: https://github.com/killerbigpoint/ha-apps/issues",
@@ -16,12 +16,6 @@
   "backup_exclude": [
     "*/logs"
   ],
-  "ports": {
-    "3552/tcp": 3552
-  },
-  "ports_description": {
-    "3552/tcp": "Admin Interface"
-  },
   "map": [
     {
       "type": "data",
@@ -29,12 +23,10 @@
     }
   ],
   "options": {
-    "ENCRYPTION_KEY": "",
     "ARCANE_MANAGER_API_URL": "",
     "ARCANE_AGENT_TOKEN": ""
   },
   "schema": {
-    "ENCRYPTION_KEY": "str",
     "ARCANE_MANAGER_API_URL": "str",
     "ARCANE_AGENT_TOKEN": "str"
   }
