@@ -10,7 +10,7 @@ import (
 
 type Options struct {
 	EncryptionKey string `json:"ENCRYPTION_KEY"`
-	APIUrl     any    `json:"ARCANE_MANAGER_API_URL"`
+	APIUrl        string `json:"ARCANE_MANAGER_API_URL"`
 	AgentToken    string `json:"ARCANE_AGENT_TOKEN"`
 }
 
@@ -40,7 +40,7 @@ func main() {
 		fatal("Cannot set ARCANE_AGENT: %v", err)
 	}
 	
-	if err := os.Setenv("ARCANE_MANAGER_API_URL", APIUrl); err != nil {
+	if err := os.Setenv("ARCANE_MANAGER_API_URL", options.APIUrl); err != nil {
 		fatal("Cannot set ARCANE_MANAGER_API_URL: %v", err)
 	}
 
