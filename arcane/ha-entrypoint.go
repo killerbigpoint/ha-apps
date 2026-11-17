@@ -9,7 +9,6 @@ import (
 )
 
 type Options struct {
-	EncryptionKey string `json:"ENCRYPTION_KEY"`
 	APIUrl        string `json:"ARCANE_MANAGER_API_URL"`
 	AgentToken    string `json:"ARCANE_AGENT_TOKEN"`
 }
@@ -31,11 +30,6 @@ func main() {
 		fatal("ENCRYPTION_KEY is missing or empty")
 	}
 	
-	// Export configuration to Arcane.
-	if err := os.Setenv("ENCRYPTION_KEY", options.EncryptionKey); err != nil {
-		fatal("Cannot set ENCRYPTION_KEY: %v", err)
-	}
-
 	if err := os.Setenv("ARCANE_AGENT", "true"); err != nil {
 		fatal("Cannot set ARCANE_AGENT: %v", err)
 	}
