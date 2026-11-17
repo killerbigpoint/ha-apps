@@ -10,8 +10,8 @@ import (
 
 type Options struct {
 	EncryptionKey string `json:"ENCRYPTION_KEY"`
-	AgentMode     any    `json:"AGENT_MODE"`
-	AgentToken    string `json:"AGENT_TOKEN"`
+	APIUrl     any    `json:"ARCANE_MANAGER_API_URL"`
+	AgentToken    string `json:"ARCANE_AGENT_TOKEN"`
 }
 
 func main() {
@@ -30,40 +30,22 @@ func main() {
 	if strings.TrimSpace(options.EncryptionKey) == "" {
 		fatal("ENCRYPTION_KEY is missing or empty")
 	}
-
-	// Handle AGENT_MODE as either a JSON boolean or string.
-	agentMode := "false"
-
-	switch value := options.AgentMode.(type) {
-	case nil:
-		// Default to false.
-	case bool:
-		if value {
-			agentMode = "true"
-		}
-	case string:
-		if value != "" {
-			mode := strings.ToLower(strings.TrimSpace(value))
-			if mode != "true" && mode != "false" {
-				fatal("AGENT_MODE must be true or false")
-			}
-			agentMode = mode
-		}
-	default:
-		fatal("Invalid AGENT_MODE type")
-	}
-
+	
 	// Export configuration to Arcane.
 	if err := os.Setenv("ENCRYPTION_KEY", options.EncryptionKey); err != nil {
 		fatal("Cannot set ENCRYPTION_KEY: %v", err)
 	}
 
-	if err := os.Setenv("AGENT_MODE", agentMode); err != nil {
-		fatal("Cannot set AGENT_MODE: %v", err)
+	if err := os.Setenv("ARCANE_AGENT", "true"); err != nil {
+		fatal("Cannot set ARCANE_AGENT: %v", err)
+	}
+	
+	if err := os.Setenv("ARCANE_MANAGER_API_URL", APIUrl); err != nil {
+		fatal("Cannot set ARCANE_MANAGER_API_URL: %v", err)
 	}
 
-	if err := os.Setenv("AGENT_TOKEN", options.AgentToken); err != nil {
-		fatal("Cannot set AGENT_TOKEN: %v", err)
+	if err := os.Setenv("ARCANE_AGENT_TOKEN", options.AgentToken); err != nil {
+		fatal("Cannot set ARCANE_AGENT_TOKEN: %v", err)
 	}
 
 	if err := os.Setenv("DOCKER_HOST", "unix:///run/docker.sock"); err != nil {
