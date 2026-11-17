@@ -1,4 +1,4 @@
-# Arcane App
+# Arcane App (Agent)
 
 ![Version][version-shield]
 ![Project Stage][project-stage-shield]
@@ -11,12 +11,6 @@ This app runs the **latest upstream** ([getarcaneapp/arcane](https://github.com/
 
 - Administrate Docker
 
-## Ports
-
-| Port | Protocol  | Description                        |
-| ---- | --------- | ---------------------------------- |
-| 3552 | TCP       | Admin Interface                    |
-
 ## Upgrading
 
 Update the app through the Home Assistant UI when a new version is published.
@@ -28,10 +22,9 @@ After upgrading, verify that:
 
 ## Notes
 
-- Ports 3552 must be free on the host
 - This add-on does **not** use a HA base image; it uses the official getarcaneapp Docker image directly.
 
-[version-shield]: https://img.shields.io/badge/version-1.0.1-blue.svg
+[version-shield]: https://img.shields.io/badge/version-1.1.2-blue.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-stable-green.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
