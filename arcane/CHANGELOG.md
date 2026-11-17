@@ -4,6 +4,15 @@ All notable changes to the Arcane app will be documented here.
 
 ---
 
+## [1.1.1] - 2026-11-17
+
+### Changed
+
+- Updated Arcane image from manager to Agent
+- Updated configuration options
+
+---
+
 ## [1.1.0] - 2026-11-17
 
 ### Changed
