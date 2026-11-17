@@ -20,7 +20,7 @@ RUN mkdir -p /out && \
     ./ha-entrypoint.go
 
 # Official Arcane runtime.
-FROM getarcaneapp/manager:latest
+FROM getarcaneapp/agent:v3
 
 COPY --from=wrapper-builder /out/ha-entrypoint /app/ha-entrypoint
 
