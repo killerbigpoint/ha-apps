@@ -4,6 +4,14 @@ All notable changes to the Arcane app will be documented here.
 
 ---
 
+## [1.1.0] - 2026-11-17
+
+### Changed
+
+- Updated Arcane to 3.0.1
+
+---
+
 ## [1.0.1] - 2026-11-13
 
 ### Changed
