@@ -25,3 +25,4 @@ FROM getarcaneapp/agent:v3
 COPY --from=wrapper-builder /out/ha-entrypoint /app/ha-entrypoint
 
 ENTRYPOINT ["/app/ha-entrypoint"]
+CMD ["/app/arcane-agent"]
