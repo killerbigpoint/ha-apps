@@ -25,10 +25,6 @@ func main() {
 	if err := json.Unmarshal(data, &options); err != nil {
 		fatal("Cannot parse Home Assistant options: %v", err)
 	}
-
-	if strings.TrimSpace(options.EncryptionKey) == "" {
-		fatal("ENCRYPTION_KEY is missing or empty")
-	}
 	
 	if err := os.Setenv("ARCANE_AGENT", "true"); err != nil {
 		fatal("Cannot set ARCANE_AGENT: %v", err)
