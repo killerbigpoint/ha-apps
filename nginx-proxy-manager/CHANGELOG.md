@@ -4,6 +4,16 @@ All notable changes to the Nginx Proxy Manager app will be documented here.
 
 ---
 
+## [1.0.2] - 2026-11-20
+
+### ⚠️ SECURITY ADVISORY
+
+### Changed
+
+- Updated to v2026-11-18-r1 of NPMPlus to fix several security vulnerabilities
+
+---
+
 ## [1.0.1] - 2026-11-13
 
 ### Changed
