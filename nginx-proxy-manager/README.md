@@ -5,7 +5,7 @@
 ![Maintained][maintenance-shield]
 
 Expose your services easily and securely with a beautiful web GUI for Nginx.
-This app runs the **latest upstream** ([ZoeyVid/NPMplus](https://github.com/ZoeyVid/NPMplus)) image (currently v2026-10-22-r1).
+This app runs the **latest upstream** ([ZoeyVid/NPMplus](https://github.com/ZoeyVid/NPMplus)) image (currently v2026-11-18-r1).
 
 ## Features
 
