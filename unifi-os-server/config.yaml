@@ -1,8 +1,7 @@
 name: "UniFi OS Server"
-version: "0.1.0"
+version: "0.1.1"
 slug: unifi_os_server
-description: >-
-  Self-hosted UniFi OS Server running its native systemd service stack.
+description: Self-hosted UniFi OS Server running its native systemd service stack
 url: https://github.com/killerbigpoint/ha-apps/tree/main/unifi-os-server
 image: ghcr.io/killerbigpoint/{arch}-addon-unifi-os-server
 arch:
@@ -10,17 +9,12 @@ arch:
   - aarch64
 init: false
 stage: experimental
-boot: auto
+boot: manual
 startup: services
-full_access: false
+full_access: true
 host_network: false
 apparmor: false
 tmpfs: true
-backup: cold
-
-privileged:
-  - NET_ADMIN
-  - NET_RAW
 
 ports:
   "443/tcp": 11443
@@ -56,9 +50,13 @@ ports_description:
 
 webui: "https://[HOST]:[PORT:443]"
 
+options:
+  UOS_SYSTEM_IP: ""
+  HARDWARE_PLATFORM: ""
+
 schema:
   UOS_SYSTEM_IP: str?
-  HARDWARE_PLATFORM: "match(^synology$)?"
+  HARDWARE_PLATFORM: "list(synology)?"
 
 environment:
   container: docker
