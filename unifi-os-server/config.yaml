@@ -12,11 +12,15 @@ init: false
 stage: experimental
 boot: auto
 startup: services
-full_access: true
+full_access: false
 host_network: false
 apparmor: false
 tmpfs: true
 backup: cold
+
+privileged:
+  - NET_ADMIN
+  - NET_RAW
 
 ports:
   "443/tcp": 11443
