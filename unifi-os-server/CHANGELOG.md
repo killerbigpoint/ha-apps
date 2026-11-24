@@ -4,6 +4,14 @@ All notable changes to the UniFi OS Server Home Assistant app are documented her
 
 ---
 
+## [0.2.1] - 2026-11-25
+
+### Changed
+
+- Fix long startup time by disabling tmpfs
+
+---
+
 ## [0.2.0] - 2026-11-24
 
 ### Changed
