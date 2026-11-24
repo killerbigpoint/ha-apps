@@ -14,7 +14,7 @@ startup: services
 full_access: true
 host_network: false
 apparmor: false
-tmpfs: true
+tmpfs: false
 
 privileged:
   - SYS_ADMIN
