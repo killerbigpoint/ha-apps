@@ -70,5 +70,10 @@ if [[ ! -x /root/uos-entrypoint.sh ]]; then
     exit 127
 fi
 
+# Temporary systemd startup diagnostics
+export SYSTEMD_LOG_LEVEL=debug
+export SYSTEMD_LOG_TARGET=console
+export SYSTEMD_LOG_TIME=true
+
 # Original fork entrypoint performs image initialization and starts systemd.
 exec /root/uos-entrypoint.sh "$@"
