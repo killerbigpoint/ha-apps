@@ -1,5 +1,5 @@
 name: "UniFi OS Server"
-version: "0.1.3"
+version: "0.1.4"
 slug: unifi_os_server
 description: Self-hosted UniFi OS Server running its native systemd service stack
 url: https://github.com/killerbigpoint/ha-apps/tree/main/unifi-os-server
