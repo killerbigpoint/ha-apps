@@ -1,3 +1,35 @@
+name: Build & Publish UniFi OS Server
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "unifi-os-server/**"
+      - ".github/workflows/build-unifi-os-server.yml"
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ha_arch: amd64
+            platform: linux/amd64
+          - ha_arch: aarch64
+            platform: linux/arm64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read add-on metadata
+        id: metadata
         env:
           HA_ARCH: ${{ matrix.ha_arch }}
         run: |
@@ -43,6 +75,8 @@
           push: true
           build-args: |
             BUILD_FROM=${{ steps.metadata.outputs.build_from }}
+            BUILD_VERSION=${{ steps.metadata.outputs.version }}
+            BUILD_ARCH=${{ matrix.ha_arch }}
           tags: |
             ${{ steps.metadata.outputs.image }}:${{ steps.metadata.outputs.version }}
             ${{ steps.metadata.outputs.image }}:latest
