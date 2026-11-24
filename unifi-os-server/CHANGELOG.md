@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the Unifi OS Server app will be documented here.
+All notable changes to the UniFi OS Server Home Assistant app are documented here.
 
 ---
 
@@ -8,5 +8,9 @@ All notable changes to the Unifi OS Server app will be documented here.
 
 ### Added
 
-- Initial release
-- Multi-arch support: `amd64`, `aarch64`
+- Initial Home Assistant app wrapper for UniFi OS Server.
+- Multi-architecture support for `amd64` and `aarch64`.
+- Bridge networking with configurable host-side port mappings.
+- Persistent storage of UniFi service data in the Home Assistant `/data` volume.
+- Cold-backup configuration for database consistency.
+- Documentation for manual device adoption and network limitations.

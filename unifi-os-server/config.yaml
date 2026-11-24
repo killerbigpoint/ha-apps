@@ -1,7 +1,8 @@
-name: UniFi OS Server
+name: "UniFi OS Server"
 version: "0.1.0"
 slug: unifi_os_server
-description: Self-hosted UniFi OS Server running its native systemd stack in a Home Assistant add-on.
+description: >-
+  Self-hosted UniFi OS Server running its native systemd service stack.
 url: https://github.com/killerbigpoint/ha-apps/tree/main/unifi-os-server
 image: ghcr.io/killerbigpoint/{arch}-addon-unifi-os-server
 arch:
@@ -9,23 +10,19 @@ arch:
   - aarch64
 init: false
 stage: experimental
-boot: manual
+boot: auto
 startup: services
-# UniFi OS Server runs a full systemd service stack, needs raw sockets for
-# device discovery/adoption, and manages its own cgroup hierarchy. This
-# requires a privileged container with AppArmor disabled.
 full_access: true
 host_network: false
 apparmor: false
 tmpfs: true
+backup: cold
+
 ports:
   "443/tcp": 11443
   "8080/tcp": 8080
   "3478/udp": 3478
-  "10001/udp": 10001
   "10003/udp": 10003
-
-  # Optional services
   "5005/tcp": null
   "6789/tcp": null
   "8444/tcp": null
@@ -33,6 +30,7 @@ ports:
   "8881/tcp": null
   "8882/tcp": null
   "9543/tcp": null
+  "28082/tcp": null
   "5671/tcp": null
   "5514/udp": null
 
@@ -40,24 +38,23 @@ ports_description:
   "443/tcp": "UniFi OS Web Interface"
   "8080/tcp": "Device Communication / Inform"
   "3478/udp": "STUN"
-  "10001/udp": "Device Discovery"
-  "10003/udp": "Device Adoption Discovery"
-  "5005/tcp": "RTP"
-  "6789/tcp": "Speed Test"
-  "8444/tcp": "Hotspot HTTPS"
-  "8880/tcp": "Hotspot HTTP"
-  "8881/tcp": "Hotspot HTTP"
-  "8882/tcp": "Hotspot HTTP"
-  "9543/tcp": "Identity Hub"
+  "10003/udp": "Device Discovery During Adoption"
+  "5005/tcp": "RTP Control"
+  "6789/tcp": "Mobile Speed Test"
+  "8444/tcp": "Hotspot HTTPS Portal"
+  "8880/tcp": "Hotspot HTTP Redirect"
+  "8881/tcp": "Hotspot HTTP Redirect"
+  "8882/tcp": "Hotspot HTTP Redirect"
+  "9543/tcp": "UniFi Identity Hub"
+  "28082/tcp": "Device Support File Downloads"
   "5671/tcp": "AMQPS"
   "5514/udp": "Remote Syslog"
 
 webui: "https://[HOST]:[PORT:443]"
-options:
-  UOS_SYSTEM_IP: ""
-  HARDWARE_PLATFORM: ""
+
 schema:
   UOS_SYSTEM_IP: str?
-  HARDWARE_PLATFORM: "list(synology)?"
+  HARDWARE_PLATFORM: "match(^synology$)?"
+
 environment:
   container: docker

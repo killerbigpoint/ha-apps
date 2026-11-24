@@ -1,6 +1,6 @@
-# Wrap the pre-built UniFi OS Server image with a Home Assistant persistence
-# shim. BUILD_FROM is supplied by the Home Assistant builder from build.yaml.
-ARG BUILD_FROM
+# Home Assistant wrapper around our published UniFi OS Server image.
+# The custom GitHub Actions workflow supplies BUILD_FROM from build.yaml.
+ARG BUILD_FROM=ghcr.io/killerbigpoint/unifi-os-server:v5.1.42
 FROM ${BUILD_FROM}
 
 ARG BUILD_VERSION
@@ -10,13 +10,13 @@ LABEL \
     io.hass.version="${BUILD_VERSION}" \
     io.hass.type="app" \
     io.hass.arch="${BUILD_ARCH}" \
-    org.opencontainers.image.source="https://github.com/killerbigpoint/ha-apps"
+    org.opencontainers.image.title="UniFi OS Server Home Assistant app" \
+    org.opencontainers.image.version="${BUILD_VERSION}" \
+    org.opencontainers.image.source="https://github.com/killerbigpoint/ha-apps" \
+    org.opencontainers.image.base.name="${BUILD_FROM}"
 
-# STOPSIGNAL (SIGRTMIN+3) and the UniFi entrypoint are inherited from the base
-# image. We only prepend a shim that maps add-on options to environment
-# variables and relocates persistent state onto the /data volume before
-# handing off to the original UniFi entrypoint.
+# Keep the upstream stop signal; only wrap its original entrypoint.
 COPY ha-entrypoint.sh /usr/local/bin/ha-entrypoint.sh
-RUN chmod +x /usr/local/bin/ha-entrypoint.sh
+RUN chmod 0755 /usr/local/bin/ha-entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/ha-entrypoint.sh"]
