@@ -76,5 +76,38 @@ export SYSTEMD_LOG_TARGET=console
 export SYSTEMD_LOG_COLOR=0
 export SYSTEMD_LOG_LOCATION=1
 
+echo "========== CONTAINER DIAGNOSTICS =========="
+
+echo "=== PID 1 CGROUP ==="
+cat /proc/1/cgroup
+
+echo "=== CGROUP MOUNTS ==="
+grep -E 'cgroup|cgroup2' /proc/self/mountinfo || true
+
+echo "=== RUNTIME MOUNTS ==="
+awk '$5 == "/run" || $5 == "/run/lock" || $5 == "/sys/fs/cgroup" {print}' \
+    /proc/self/mountinfo
+
+echo "=== FILESYSTEM TYPES ==="
+stat -f -c '%n: %T' /run /run/lock /sys/fs/cgroup
+
+echo "=== CGROUP CONTROLLERS ==="
+if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
+    cat /sys/fs/cgroup/cgroup.controllers
+else
+    echo "No cgroup.controllers file"
+fi
+
+echo "=== CGROUP WRITE TEST ==="
+if mkdir /sys/fs/cgroup/.ha-cgroup-test 2>/tmp/ha-cgroup-error; then
+    rmdir /sys/fs/cgroup/.ha-cgroup-test
+    echo "SUCCESS: cgroup directory creation works"
+else
+    echo "FAILED:"
+    cat /tmp/ha-cgroup-error
+fi
+
+echo "========== END DIAGNOSTICS =========="
+
 # Original fork entrypoint performs image initialization and starts systemd.
 exec /root/uos-entrypoint.sh "$@"
