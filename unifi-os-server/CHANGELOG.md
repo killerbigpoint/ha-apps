@@ -4,6 +4,14 @@ All notable changes to the UniFi OS Server Home Assistant app are documented her
 
 ---
 
+## [0.2.0] - 2026-11-24
+
+### Changed
+
+- Added additional permissions to hopefully make it boot
+
+---
+
 ## [0.1.5] - 2026-11-24
 
 ### Changed
