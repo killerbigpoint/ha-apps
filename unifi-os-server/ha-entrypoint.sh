@@ -76,6 +76,24 @@ export SYSTEMD_LOG_TARGET=console
 export SYSTEMD_LOG_COLOR=0
 export SYSTEMD_LOG_LOCATION=1
 
+# Make the private cgroup filesystem writable for systemd
+echo "[ha-shim] Remounting cgroup filesystem read-write"
+
+if ! mount -o remount,rw /sys/fs/cgroup; then
+    echo "[ha-shim] ERROR: Failed to remount /sys/fs/cgroup" >&2
+    exit 1
+fi
+
+# Verify that cgroup writes are permitted
+if ! mkdir /sys/fs/cgroup/.ha-cgroup-test; then
+    echo "[ha-shim] ERROR: cgroup filesystem is still not writable" >&2
+    exit 1
+fi
+
+rmdir /sys/fs/cgroup/.ha-cgroup-test
+
+echo "[ha-shim] Cgroup filesystem is writable"
+
 echo "========== CONTAINER DIAGNOSTICS =========="
 
 echo "=== PID 1 CGROUP ==="
