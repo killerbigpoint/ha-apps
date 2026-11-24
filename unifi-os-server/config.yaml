@@ -1,5 +1,5 @@
 name: "UniFi OS Server"
-version: "0.1.1"
+version: "0.1.2"
 slug: unifi_os_server
 description: Self-hosted UniFi OS Server running its native systemd service stack
 url: https://github.com/killerbigpoint/ha-apps/tree/main/unifi-os-server
@@ -56,7 +56,7 @@ options:
 
 schema:
   UOS_SYSTEM_IP: str?
-  HARDWARE_PLATFORM: "list(synology)?"
+  HARDWARE_PLATFORM: "match(^$|^synology$)"
 
 environment:
   container: docker
