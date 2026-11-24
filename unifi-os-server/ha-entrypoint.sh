@@ -73,7 +73,8 @@ fi
 # Temporary systemd startup diagnostics
 export SYSTEMD_LOG_LEVEL=debug
 export SYSTEMD_LOG_TARGET=console
-export SYSTEMD_LOG_TIME=true
+export SYSTEMD_LOG_COLOR=0
+export SYSTEMD_LOG_LOCATION=1
 
 # Original fork entrypoint performs image initialization and starts systemd.
 exec /root/uos-entrypoint.sh "$@"
