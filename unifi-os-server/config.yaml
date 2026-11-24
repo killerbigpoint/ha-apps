@@ -16,6 +16,9 @@ host_network: false
 apparmor: false
 tmpfs: true
 
+privileged:
+  - SYS_ADMIN
+
 ports:
   "443/tcp": 11443
   "8080/tcp": 8080
