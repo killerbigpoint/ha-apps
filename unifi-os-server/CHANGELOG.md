@@ -4,6 +4,14 @@ All notable changes to the UniFi OS Server Home Assistant app are documented her
 
 ---
 
+## [0.1.4] - 2026-11-24
+
+### Changed
+
+- Modified debugging
+
+---
+
 ## [0.1.3] - 2026-11-24
 
 ### Added
