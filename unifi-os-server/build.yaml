@@ -1,5 +1,6 @@
-# Base images consumed by the custom GitHub Actions workflow.
-# The Home Assistant app version in config.yaml is separate from the UniFi OS version.
+# The base image's latest tag is refreshed by killerbigpoint/unifi-os-server.
+# The scheduled workflow below detects its manifest digest and rebuilds this
+# HA add-on with a new add-on version whenever the base image changes.
 build_from:
-  amd64: ghcr.io/killerbigpoint/unifi-os-server:v5.1.42
-  aarch64: ghcr.io/killerbigpoint/unifi-os-server:v5.1.42
+  amd64: ghcr.io/killerbigpoint/unifi-os-server:latest
+  aarch64: ghcr.io/killerbigpoint/unifi-os-server:latest
