@@ -7,14 +7,107 @@ on:
       - "unifi-os-server/**"
       - ".github/workflows/build-unifi-os-server.yml"
   workflow_dispatch: {}
+  schedule:
+    # Check after the base-image repository's daily Network release check.
+    - cron: "15 8 * * *"
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
+    outputs:
+      should_build: ${{ steps.prepare.outputs.should_build }}
+      version: ${{ steps.prepare.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check base-image digest and version add-on when it changes
+        id: prepare
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          BASE_IMAGE=$(ruby -ryaml -e 'puts YAML.load_file("unifi-os-server/build.yaml").fetch("build_from").fetch("amd64")')
+          BASE_MANIFEST=$(docker buildx imagetools inspect --raw "$BASE_IMAGE")
+          BASE_DIGEST="sha256:$(printf '%s' "$BASE_MANIFEST" | sha256sum | awk '{print $1}')"
+          CURRENT_VERSION=$(ruby -ryaml -e 'puts YAML.load_file("unifi-os-server/config.yaml").fetch("version").to_s')
+          TRACKED_DIGEST=$(cat unifi-os-server/base-image-digest.txt 2>/dev/null || true)
+          SHOULD_BUILD=true
+
+          if [ "$BASE_DIGEST" = "$TRACKED_DIGEST" ] && [ "$EVENT_NAME" = "schedule" ]; then
+            echo "Base image has not changed; skipping the scheduled add-on build."
+            SHOULD_BUILD=false
+          elif [ "$BASE_DIGEST" != "$TRACKED_DIGEST" ]; then
+            if [[ ! "$CURRENT_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+              echo "Add-on version '$CURRENT_VERSION' is not a simple MAJOR.MINOR.PATCH version" >&2
+              exit 1
+            fi
+            MAJOR="${BASH_REMATCH[1]}"
+            MINOR="${BASH_REMATCH[2]}"
+            PATCH="${BASH_REMATCH[3]}"
+            NEW_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+            RELEASE_DATE=$(date -u +%Y-%m-%d)
+
+            sed -i "s/^version: .*/version: ${NEW_VERSION}/" unifi-os-server/config.yaml
+            printf '%s\n' "$BASE_DIGEST" > unifi-os-server/base-image-digest.txt
+
+            TEMP_CHANGELOG=$(mktemp)
+            awk -v version="$NEW_VERSION" -v date="$RELEASE_DATE" '
+              { print }
+              !inserted && $0 == "---" {
+                print ""
+                print "## [" version "] - " date
+                print ""
+                print "### Changed"
+                print ""
+                print "- Rebuilt against an updated UniFi OS Server base image."
+                print ""
+                print "---"
+                inserted=1
+              }
+            ' unifi-os-server/CHANGELOG.md > "$TEMP_CHANGELOG"
+            mv "$TEMP_CHANGELOG" unifi-os-server/CHANGELOG.md
+
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add unifi-os-server/config.yaml unifi-os-server/CHANGELOG.md unifi-os-server/base-image-digest.txt
+            git commit -m "chore(unifi-os-server): bump add-on to ${NEW_VERSION} for updated base image"
+            git push origin "HEAD:${BRANCH_NAME}"
+            CURRENT_VERSION="$NEW_VERSION"
+            echo "Updated add-on version to ${NEW_VERSION} for base image ${BASE_DIGEST}"
+          fi
+
+          {
+            echo "should_build=$SHOULD_BUILD"
+            echo "version=$CURRENT_VERSION"
+            echo "base_image=$BASE_IMAGE"
+            echo "base_digest=$BASE_DIGEST"
+          } >> "$GITHUB_OUTPUT"
+
   build:
+    needs: prepare
+    if: needs.prepare.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-
     strategy:
       fail-fast: false
       matrix:
@@ -27,6 +120,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - name: Read add-on metadata
         id: metadata
@@ -82,7 +177,8 @@ jobs:
             ${{ steps.metadata.outputs.image }}:latest
 
   release:
-    needs: build
+    needs: [prepare, build]
+    if: needs.prepare.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -91,6 +187,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
 
       - name: Read add-on version
@@ -103,6 +200,7 @@ jobs:
         id: check_tag
         run: |
           tag="unifi-os-server-v${{ steps.version.outputs.version }}"
+          git fetch --tags
           if git rev-parse "$tag" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
             echo "Tag $tag already exists — skipping release creation"
