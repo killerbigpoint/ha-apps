@@ -1,5 +1,5 @@
 name: Immich
-version: 0.1.1
+version: 0.1.2
 slug: immich
 description: Self-hosted photo and video management with PostgreSQL and Redis, using remote machine learning
 url: https://immich.app
@@ -12,6 +12,7 @@ init: false
 startup: services
 boot: auto
 stage: experimental
+restore_backup: false
 
 webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"
 
@@ -62,3 +63,7 @@ schema:
   PUID: int(0,)
   PGID: int(0,)
   APPLY_PERMISSIONS: bool
+  backup_location: str?
+  restore_backup: bool
+  delete_db: bool?
+  clean_redis: bool?
