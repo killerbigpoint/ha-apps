@@ -1,11 +1,23 @@
 # Changelog
 
+---
+
+## [0.1.2] - 2026-11-26
+
+### Fixed
+
+- Explicitly disable database restore by default.
+- Add optional database backup restoration configuration.
+
+---
+
 ## [0.1.1] - 2026-11-26
 
 ### Changed
 
 - Rebuilt against updated upstream NoML image (sha256:8bad7faa53923755653a9292f5058594b1e7d9d8df2e2f71859c5644db202a84).
 
+---
 
 ## [0.1.0] - 2026-11-26
 
