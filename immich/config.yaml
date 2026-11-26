@@ -1,5 +1,5 @@
 name: Immich
-version: 0.1.0
+version: 0.1.1
 slug: immich
 description: Self-hosted photo and video management with PostgreSQL and Redis, using remote machine learning
 url: https://immich.app
