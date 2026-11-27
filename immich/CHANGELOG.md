@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3] - 2026-11-27
+
+### Changed
+
+- Rebuilt against updated upstream NoML image (sha256:da759ce48571e88bca6588597676a69ff9072c064c14fcc7e464c0dbcc1dd0b3).
+
+
 ---
 
 ## [0.1.2] - 2026-11-26
